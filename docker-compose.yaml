@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  ws:
+    container_name: ws
+    hostname: ws
+    image: juliocesarmidia/java-web-service-soap:latest
+    build:
+      context: ./
+    restart: on-failure
+    networks:
+      - subnet_0
+    ports:
+      - 8090:8090
+    environment:
+      JAVA_OPTIONS: -Xmx400m
+
+networks:
+  subnet_0:
+    driver: bridge
