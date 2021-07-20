@@ -2,11 +2,12 @@ package com.github.juliocesarscheidt;
 
 import jakarta.xml.ws.Endpoint;
 import com.github.juliocesarscheidt.services.*;
-import com.github.juliocesarscheidt.domain.*;
+import com.github.juliocesarscheidt.interfaces.CalculatorWS;
+import com.github.juliocesarscheidt.interfaces.ItemWS;
 
 public class Main {
   final static String serverHost = "0.0.0.0";
-  final static Integer serverPort = 8090;
+  final static Integer serverPort = 9090;
 
 	public static void main(String[] args) {
 		Thread thread = Thread.currentThread();
@@ -15,12 +16,15 @@ public class Main {
 		try {
 			thread.setContextClassLoader(Endpoint.class.getClassLoader());
 
-			Calculator calc = new CalculatorImpl();
-      String URL = "http://" + serverHost + ":" + serverPort + "/calculator";
+			String URL = "http://" + serverHost + ":" + serverPort;
 
-      System.out.println("SOAP calculator service running on " + URL);
+			CalculatorWS calcWS = new CalculatorWSImpl();
+			ItemWS itemWS = new ItemWSImpl();
 
-      Endpoint.publish(URL, calc);
+			System.out.println("SOAP calculator service running on " + URL);
+
+			Endpoint.publish(URL + "/calculatorWS", calcWS);
+			Endpoint.publish(URL + "/itemWS", itemWS);
 
 		} finally {
 			thread.setContextClassLoader(contextClassLoader);

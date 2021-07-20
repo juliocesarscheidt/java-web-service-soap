@@ -11,7 +11,7 @@ services:
     networks:
       - subnet_0
     ports:
-      - 8090:8090
+      - 9090:9090
     environment:
       JAVA_OPTIONS: -Xmx400m
 

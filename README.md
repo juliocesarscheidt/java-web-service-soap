@@ -1,9 +1,15 @@
 # Java Web Service SOAP
 
-wsdl :: <http://127.0.0.1:8090/calculator?wsdl>
+Simple Java WS using SOAP
+
+WSDLs:
+<http://127.0.0.1:9090/calculatorWS?wsdl>
+<http://127.0.0.1:9090/itemWS?wsdl>
 
 ```bash
-## Sum
+######## Calculator WS ########
+
+# Sum Action
 DATA=$(cat <<EOF
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://services.juliocesarscheidt.github.com/">
    <soapenv:Header/>
@@ -21,31 +27,37 @@ EOF
 curl --silent -X POST \
   -H 'Content-Type: text/xml' \
   -d "${DATA}" \
-  --url 'http://127.0.0.1:8090/calculator'
+  --url 'http://127.0.0.1:9090/calculatorWS'
 
 # response
-# <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-#    <S:Body>
-#       <ns2:sumResponse xmlns:ns2="http://services.juliocesarscheidt.github.com/">
-#          <return>
-#             <value>12.0</value>
-#             <kind>sum</kind>
-#          </return>
-#       </ns2:sumResponse>
-#    </S:Body>
+# <?xml version='1.0' encoding='UTF-8'?>
+#   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+#   <S:Body>
+#     <ns2:sumResponse xmlns:ns2="http://services.juliocesarscheidt.github.com/">
+#       <sum>
+#         <value>12.0</value>
+#         <kind>sum</kind>
+#       </sum>
+#     </ns2:sumResponse>
+#   </S:Body>
 # </S:Envelope>
 
 
-## Subtraction
+######## Item WS ########
+
+# Create Item
 DATA=$(cat <<EOF
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://services.juliocesarscheidt.github.com/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <ws:subtraction>
-         <arg0>12</arg0>
-         <arg1>8</arg1>
-      </ws:subtraction>
-   </soapenv:Body>
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ws:createItem>
+      <item>
+        <id>10</id>
+        <name>Item 10</name>
+        <price>100.00</price>
+      </item>
+    </ws:createItem>
+  </soapenv:Body>
 </soapenv:Envelope>
 EOF
 )
@@ -54,17 +66,18 @@ EOF
 curl --silent -X POST \
   -H 'Content-Type: text/xml' \
   -d "${DATA}" \
-  --url 'http://127.0.0.1:8090/calculator'
+  --url 'http://127.0.0.1:9090/itemWS'
 
-# response
-# <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-#    <S:Body>
-#       <ns2:subtractionResponse xmlns:ns2="http://services.juliocesarscheidt.github.com/">
-#          <return>
-#             <value>4.0</value>
-#             <kind>subtraction</kind>
-#          </return>
-#       </ns2:subtractionResponse>
-#    </S:Body>
+# <?xml version='1.0' encoding='UTF-8'?>
+#   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+#   <S:Body>
+#     <ns2:createItemResponse xmlns:ns2="http://services.juliocesarscheidt.github.com/">
+#       <created>
+#         <id>10</id>
+#         <name>Item 10</name>
+#         <price>100.0</price>
+#       </created>
+#     </ns2:createItemResponse>
+#   </S:Body>
 # </S:Envelope>
 ```
