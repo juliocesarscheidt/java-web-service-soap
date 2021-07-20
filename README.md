@@ -1,14 +1,23 @@
 # Java Web Service SOAP
 
-Simple Java WS using SOAP
+Simple Java WS using SOAP, running on Docker containers
 
-WSDLs:
-<http://127.0.0.1:9090/calculatorWS?wsdl>
-<http://127.0.0.1:9090/itemWS?wsdl>
+## Up and Running
 
 ```bash
-######## Calculator WS ########
+docker-compose up --build -d ws
+docker-compose logs -f ws
+```
 
+## WSDLs
+
+- <http://127.0.0.1:9090/calculatorWS?wsdl>
+
+- <http://127.0.0.1:9090/itemWS?wsdl>
+
+### Calculator WS
+
+```bash
 # Sum Action
 DATA=$(cat <<EOF
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://services.juliocesarscheidt.github.com/">
@@ -41,10 +50,11 @@ curl --silent -X POST \
 #     </ns2:sumResponse>
 #   </S:Body>
 # </S:Envelope>
+```
 
+### Item WS
 
-######## Item WS ########
-
+```bash
 # Create Item
 DATA=$(cat <<EOF
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://services.juliocesarscheidt.github.com/">

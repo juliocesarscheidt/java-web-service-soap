@@ -11,13 +11,13 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ItemList {
 
-    @XmlElement(name="item")
-    private List<Item> itens;
+  @XmlElement(name="item")
+  private List<Item> itens;
 
-    public ItemList(List<Item> itens) {
-        this.itens = itens;
-    }
+  public ItemList(List<Item> itens) {
+      this.itens = itens;
+  }
 
-    public ItemList() {
-    }
+  public ItemList() {
+  }
 }

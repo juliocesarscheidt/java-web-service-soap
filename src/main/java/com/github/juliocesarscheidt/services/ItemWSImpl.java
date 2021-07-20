@@ -24,26 +24,26 @@ public class ItemWSImpl implements ItemWS {
 		this.itensList.add(new Item(3, "Item 3", 39.90f));
 		this.itensList.add(new Item(4, "Item 4", 29.90f));
 	}
-	
+
 	@WebMethod(operationName="findOneItem")
 	@WebResult(name="item")
 	public Item findOne(int id) {
 		Item selected = null;
 		for (Item item: this.itensList) {
 			if (item.getId() == id) {
-				 selected = item;
-				 break;
+        selected = item;
+        break;
 			}
 		}
 		return selected;
 	}
-	
+
 	@WebMethod(operationName="findAllItem")
 	@WebResult(name="itens")
 	public ItemList findAll() {
 		return new ItemList(this.itensList);
 	}
-	
+
 	@WebMethod(operationName="createItem")
 	@WebResult(name="created")
 	public Item create(@WebParam(name="item") Item item) {
@@ -56,7 +56,7 @@ public class ItemWSImpl implements ItemWS {
 	public Item update(@WebParam(name="item") int id, Item item) {
 		Item selected = null;
 		int index = 0;
-		
+
 		for (Item it: this.itensList) {
 			if (it.getId() == id) {
 				selected = it;
@@ -67,19 +67,19 @@ public class ItemWSImpl implements ItemWS {
 		if (selected == null) {
 			return selected;
 		}
-		
+
 		selected.setId(item.getId());
 		selected.setName(item.getName());
 		selected.setPrice(item.getPrice());
-		
+
 		this.itensList.set(index, selected);
-		
+
 		return selected;
 	}
-	
+
 	@WebMethod(operationName="deleteItem")
 	@WebResult(name="deleted")
-	public void delete(int id) {		
+	public void delete(int id) {
 		for (Item item: this.itensList) {
 			if (item.getId() == id) {
 				int index = this.itensList.indexOf(item);
