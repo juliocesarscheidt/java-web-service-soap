@@ -5,8 +5,8 @@ Simple Java WS using SOAP, running on Docker containers
 ## Up and Running
 
 ```bash
-docker-compose up --build -d ws
-docker-compose logs -f ws
+docker-compose up --build -d soap-ws
+docker-compose logs -f soap-ws
 ```
 
 ## WSDLs

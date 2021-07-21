@@ -1,10 +1,10 @@
 version: '3.4'
 
 services:
-  ws:
-    container_name: ws
-    hostname: ws
-    image: juliocesarmidia/java-web-service-soap:latest
+  soap-ws:
+    container_name: soap-ws
+    hostname: soap-ws
+    image: juliocesarmidia/soap-ws:latest
     build:
       context: ./
     restart: on-failure
